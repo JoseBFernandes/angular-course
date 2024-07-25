@@ -9,7 +9,8 @@ import {
     Input,
     OnInit,
     Output, QueryList, TemplateRef,
-    ViewChild
+    ViewChild,
+    ViewEncapsulation
 } from '@angular/core';
 import {COURSES} from '../../db-data';
 import {Course} from '../model/course';
@@ -19,6 +20,7 @@ import {CourseImageComponent} from '../course-image/course-image.component';
     selector: 'course-card',
     templateUrl: './course-card.component.html',
     styleUrls: ['./course-card.component.css']
+    //encapsulation: ViewEncapsulation.ShadowDom
 })
 export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentInit {
 
@@ -60,10 +62,8 @@ export class CourseCardComponent implements OnInit, AfterViewInit, AfterContentI
 
     }
 
-    cardClasses() {
-        if (this.course.category == 'BEGINNER') {
-            return 'beginner';
-        }
+    cardClasses(): Array<string> {
+        return this.course.category == 'BEGINNER' ? ['beginner', ''] : [];
     }
 
     cardStyles() {

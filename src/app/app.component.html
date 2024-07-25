@@ -1,27 +1,43 @@
-<div class="top-menu">
+<div highlighted class="top-menu">
 
     <img class="logo"
          src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
 
 </div>
 
+<div class="salmon-theme">
+    <div class="course-card">
+        Test Card
+    </div>
 
+    <ng-template [ngIf]="courses[0]" let-course>
 
-<div class="courses" *ngIf="courses[0] as course">
+        <div class="courses">
 
-    <course-card
-            (courseSelected)="onCourseSelected($event)"
-                 [course]="course">
+            <!--highlighted can be started as "true" whith [] on highlighted
+            add (toggleHighlight)="onToggle($event)" on course-card to see on console the toggle between the highlighted true/false-->
 
-        <course-image [src]="course.iconUrl"></course-image>
+            <course-card highlighted #highlighter="hl"
+                (toggleHighlight)="onToggle($event)"
+                (courseSelected)="onCourseSelected($event)"
+                [course]="course">
+                
+            <!--always present the user with img UNLESS(ngxUnless) the course dont have an image
+            <ng-template [ngxUnless]="!course.iconUrl">
+                <course-image [src]="course.iconUrl"></course-image>
+            </ng-template> -->
+            <course-image [src]="course.iconUrl" *ngxUnless="!course.iconUrl">
 
-        <div class="course-description">
-            {{ course.longDescription }}
+            </course-image> 
+        
+            <div class="course-description" 
+                (dblclick)="highlighter.toggle()">
+                {{ course.longDescription }}
+            </div>
+    
+            </course-card>
+    
         </div>
 
-    </course-card>
-
-
+    </ng-template>
 </div>
-
-
