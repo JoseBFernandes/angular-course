@@ -6,10 +6,24 @@
 </div>
 
 <div>
+  <div class="demo">
 
+    <!-- i18n is for translaction = "MEANING | DESCRIPTION"-->
+    <h4 i18n="welcome message| Greeting">Welcome to the Angular Core Deep Dive Course</h4>
+
+    <button (click)="onEditCourse()" i18n>Edit Course</button>
+
+    <div i18n>{coursesTotal, plural, =0 {No courses is available.}
+      =1 {One course is available.}
+      other {Total of {{coursesTotal}} courses available} }</div>
+
+  </div>
+
+
+<!--
   <div class="courses">
 
-    <course-card *ngFor="let course of courses"
+    <course-card *ngFor="let course of (courses$ | async)"
                  [course]="course">
 
       <course-image [src]="course.iconUrl"></course-image>
@@ -17,7 +31,21 @@
     </course-card>
 
   </div>
+SAME AS THIS-->  <!--*ngIf="courses$ | async as courses" IF "@Welcome" => this is the ID of the translation-->
+    <div class="courses">
+      
+        <!--*ngFor="let course of courses"-->
+                                          <!--(courses | filterByCategory: 'BEGINNER')-->
+        <course-card *ngFor="let course of courses"
+                (courseChanged)="save($event)"
+                type="begginner"
+                [course]="course">
 
+        <course-image [src]="course.iconUrl"></course-image>
+
+        </course-card>
+
+    </div>
 
 </div>
 

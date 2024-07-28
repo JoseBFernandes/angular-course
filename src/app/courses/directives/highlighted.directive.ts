@@ -1,8 +1,10 @@
-import {Directive, EventEmitter, HostBinding, HostListener, Input, Output} from '@angular/core';
+import {Directive, EventEmitter, Host, HostBinding, HostListener, Input, Output} from '@angular/core';
+import { CoursesService } from '../courses.service';
 
 @Directive({
     selector: '[highlighted]',
-    exportAs: 'hl'
+    exportAs: 'hl',
+    standalone: true
 })
 export class HighlightedDirective {
 
@@ -12,9 +14,11 @@ export class HighlightedDirective {
     @Output()
     toggleHighlight = new EventEmitter();
 
-    constructor() {
+    //If @Host() is used, that means getting the courseService from course-card, and that why we have the providers in course-card, RARELY NEEDED
+    //(course-card could get his CourseService from parente ,app.component, with the @skipself())
+    constructor( private coursesService: CoursesService) {
 
-        console.log('Directive created..');
+        console.log('coursesService highlighted ' + coursesService.id);
 
     }
 
@@ -24,7 +28,7 @@ export class HighlightedDirective {
     }
 
     @HostListener('mouseover', ['$event'])
-    mouseOver($event) {
+    mouseOver($event: string) {
 
         console.log($event);
 
