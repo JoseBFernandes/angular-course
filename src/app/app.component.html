@@ -5,11 +5,37 @@
 
 </div>
 
+<!--<div style="border: 5px solid red; min-height: 900px; margin: 10px"></div>
 
+<h1 #title>Trigger viewport</h1>-->
+
+<!--<div class="demo-triggers">
+  <input placeholder="Type to trigger prefetch" #prefetch>
+  <button #display>Trigger Display</button>
+</div>-->
+
+<div #triggerPrefetch style="border: 5px solid red; min-height: 200px; margin: 10px; padding: 10px">
+  <button (click)="onPrefetch()">Trigger Prefetch</button>
+  <button (click)="onDisplay()">Trigger Display</button>
+</div>
 
 
 <div>
+  <!--WITHOUT PARAMETER THE DEFAULT IS THE PLACEHOLDER
+  
+  triggers (on idle; prefetch on idle) "prefetch on" its for loading data from backend 10s after, and "on" its to display the defer block after 15s
+  THEY START AT THE SAME TIME  ||| (on timer(15s); prefetch on timer(10s)
 
+  viewport its like a scroll loading, that it will just became visible when the placeholder for ex. appears in screen
+  IF PARAMETER -- viewport(title) its means that the defer block will load only when we see the title (comented at top with a box + the title)
+  
+  on interaction(display); prefetch on interaction(prefetch) -- to render the defer block only with the interaction with the button(render) or the placeholder(fetch data) 
+  (comented at top)
+  
+  hover() its activated when the cursor passses on a given area of the display-->
+
+  @defer(when display; prefetch when performPrefetch) {
+  <div class="courses">
       @for (course of courses; track $index; let count = $count) {
 
         <course-card
@@ -18,7 +44,24 @@
           (courseSelected)="onCourseSelected($event)" />
 
       }
+  </div>
+  }
   
+  <!--its used for display something while de defer block is loaded, can have a parameter like loading with minimum of 3s for ex-->
+  @placeholder {
+    <h2>This is the placeholder!</h2>
+  }
+
+  <!--PARAMETER (minimum 3s; after 1s) -- if loading-defer takes more 1s, then show loading for more then 3s, if take less then 1s dont show loading-->
+  @loading {
+    <h2>This is a loading indicator...</h2>
+  }
+
+  <!--It will chose after 15s (that is when the defer block is initialized) between show the defer block or this error if occurred and error-->
+  @error {
+    <h2>An error occurred.</h2>
+  }
+
 </div>
 
 
