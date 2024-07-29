@@ -8,12 +8,29 @@
 <div>
 
   <div class="courses">
-
+    <!--to call counter, just need to call them like they were methods -->
+                        <!--counter()-->
     <div>Counter value: {{ counterService.counter() }}</div>
 
     <div>Derived value: {{ derivedCounter() }}</div>
 
+    <div>Multiplier: {{ multiplier }}</div>
+
+    <!--<div>Course Title: {{ course().title }}</div>
+
+    <div>Courses: {{ courses().join(", ") }}</div>-->
+
     <button (click)="increment()">Increment</button>
+
+    <button (click)="incrementMultiplier()">++ Multiplier</button>
+
+    <button (click)="onCleanup()">Cleanup</button>
+
+    <!--<div>Counter value: {{ counterService.counter() }}</div>
+
+    <div>Derived value: {{ derivedCounter() }}</div>
+
+    <button (click)="increment()">Increment</button>-->
 
   </div>
 

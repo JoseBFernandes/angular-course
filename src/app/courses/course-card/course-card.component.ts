@@ -3,7 +3,7 @@ import {
     Attribute,
     ChangeDetectionStrategy,
     ChangeDetectorRef,
-    Component, DoCheck,
+    Component, DoCheck, InputDecorator,
     EventEmitter,
     Input, OnChanges,
     OnDestroy,
@@ -28,11 +28,13 @@ import {CommonModule, NgIf} from '@angular/common';
 })
 export class CourseCardComponent implements  OnInit {
 
+    //course = input<Course>();
+
     @Input()
     course: Course;
 
-    @Input()
-    cardIndex: number;
+    //@Input()
+    //cardIndex: number;
 
     @Output('courseChanged')
     courseEmitter = new EventEmitter<Course>();
