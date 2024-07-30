@@ -4,7 +4,7 @@ import {
     ChangeDetectionStrategy,
     ChangeDetectorRef,
     Component, DoCheck, InputDecorator,
-    EventEmitter,
+    EventEmitter, input,
     Input, OnChanges,
     OnDestroy,
     OnInit,
